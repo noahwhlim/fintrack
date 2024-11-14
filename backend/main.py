@@ -34,6 +34,24 @@ def get_balance():
             balance -= transaction.amount
     return jsonify({"balance": round(balance, 2)})
 
+@app.route("/income", methods=["GET"])
+def get_income():
+    transactions = Transaction.query.all()
+    balance = 0
+    for transaction in transactions:
+        if transaction.type == "income":
+            balance += transaction.amount
+    return jsonify({"balance": round(balance, 2)})
+
+@app.route("/expenses", methods=["GET"])
+def get_expenses():
+    transactions = Transaction.query.all()
+    balance = 0
+    for transaction in transactions:
+        if transaction.type == "expense":
+            balance += transaction.amount
+    return jsonify({"balance": round(balance, 2)})
+
 # POST
 @app.route("/transactions", methods=["POST"])
 def create_transaction():
