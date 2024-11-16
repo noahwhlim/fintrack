@@ -57,8 +57,7 @@ def get_expenses():
 def create_transaction():
     data = request.get_json()
     new_transaction = Transaction(
-        uid=data["uid"],
-        amount=round(data["amount"], 2),
+        amount=round(int(data["amount"]), 2),
         type=data["type"],
         category=data["category"],
         description=data["description"]

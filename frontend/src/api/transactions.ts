@@ -10,18 +10,24 @@ export const getAllTransactions = async () => {
   return data;
 };
 
-export const addTransaction = async () => {
+interface TransactionFormData {
+  amount: number;
+  type: string;
+  category: string;
+  description: string;
+}
+
+export const addTransaction = async (formData: TransactionFormData) => {
   const response = await fetch("http://127.0.0.1:5000/transactions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      uid: 789,
-      amount: 25.7531,
-      type: "expense",
-      category: "Groceries",
-      description: "Weekly grocery shopping",
+      amount: formData.amount,
+      type: formData.type,
+      category: formData.category,
+      description: formData.description,
     }),
   });
   const data = await response.json();

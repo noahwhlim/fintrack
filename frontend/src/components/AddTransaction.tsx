@@ -15,13 +15,33 @@ import { addTransaction } from "@/api/transactions";
 
 const AddTransaction = () => {
   const [isAddingTransaction, setIsAddingTransaction] = useState(false);
+  const [formData, setFormData] = useState({
+    amount: 0,
+    category: "",
+    type: "",
+    description: "",
+  });
+
+  const handleFormChange = (e: any) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+    console.log(formData);
+  };
 
   const toggleAddTransaction = () =>
     setIsAddingTransaction(!isAddingTransaction);
 
-  const handleAddTransaction = () => {
-    console.log("Adding transaction");
-  }
+  const handleAddTransaction = async (event: any) => {
+    event.preventDefault();
+    await addTransaction(formData);
+    setFormData({
+      amount: 0,
+      category: "",
+      type: "",
+      description: "",
+    });
+    console.log(formData);
+  };
 
   return (
     <div className="mt-8">
@@ -31,15 +51,15 @@ const AddTransaction = () => {
       {isAddingTransaction && (
         <Card className="mt-4">
           <CardContent className="pt-6">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleAddTransaction}>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="amount">Amount</Label>
                   <Input
                     id="amount"
-                    placeholder="Enter amount"
                     type="number"
-                    step="1.00"
+                    value={formData.amount}
+                    onChange={handleFormChange}
                   />
                 </div>
                 <div className="space-y-2">
@@ -48,12 +68,18 @@ const AddTransaction = () => {
                     id="category"
                     placeholder="Enter category"
                     type="text"
+                    value={formData.category}
+                    onChange={handleFormChange}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="category">Category</Label>
-                  <Select>
-                    <SelectTrigger id="category">
+                  <Label htmlFor="category">Type</Label>
+                  <Select
+                    onValueChange={(value) =>
+                      handleFormChange({ target: { id: "type", value } })
+                    }
+                  >
+                    <SelectTrigger>
                       <SelectValue placeholder="Select type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -64,11 +90,18 @@ const AddTransaction = () => {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="description">Description</Label>
-                  <Input id="description" placeholder="Enter description" />
+                  <Input
+                    id="description"
+                    placeholder="Enter description"
+                    value={formData.description}
+                    onChange={handleFormChange}
+                  />
                 </div>
               </div>
 
-              <Button type="submit" onSubmit={handleAddTransaction}>Add Transaction</Button>
+              <Button type="submit" onSubmit={handleAddTransaction}>
+                Add Transaction
+              </Button>
             </form>
           </CardContent>
         </Card>

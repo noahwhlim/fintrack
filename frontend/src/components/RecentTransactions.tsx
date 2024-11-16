@@ -22,7 +22,7 @@ const RecentTransactions = () => {
       <CardContent>
       <ul className="space-y-4">
       {transactions ? transactions.map((trans) => (
-        <li className="flex justify-between items-center">
+        <li key={trans.tid} className="flex justify-between items-center">
         <div>
           <p className="font-medium">{trans.category}</p>
           <p className="text-sm text-gray-500">{trans.description}</p>
