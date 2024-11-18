@@ -64,14 +64,14 @@ This application showcases a simple full-stack setup with a **Next.js** frontend
 6. Run the Flask server:
    `python main.py`
 
-   The backend API will be available at `http:/127.0.0.1`.
+   The backend API will be available at `http://127.0.0.1`.
 
 ## Running the Application
 
 After setting up both the frontend and backend, you can start both servers:
 
 - **Frontend**: `http://localhost:3000`
-- **Backend**: `http:/127.0.0.1`
+- **Backend**: `http://127.0.0.1`
 
 Make sure the frontend is properly communicating with the backend API.
 
@@ -88,7 +88,7 @@ Here are the available API endpoints in the Flask backend:
 Example of calling the `GET` endpoint from the frontend:
 
 ```javascript
-fetch('http://http:/127.0.0.1/transactions')
+fetch('http://127.0.0.1/transactions')
   .then(response => response.json())
   .then(data => console.log(data));
 ```
