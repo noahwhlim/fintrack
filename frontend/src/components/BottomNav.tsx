@@ -15,7 +15,7 @@ const BottomNav = () => {
         </li> */}
         <li>
           <Link
-            href="/view-transactions"
+            href="/transactions"
             className="text-blue-600 hover:underline"
           >
             View All Transactions

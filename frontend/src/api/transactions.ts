@@ -6,7 +6,7 @@ export const getAllTransactions = async () => {
     },
   });
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
@@ -34,25 +34,25 @@ export const addTransaction = async (formData: TransactionFormData) => {
   console.log(data);
 };
 
-export const updateTransaction = async () => {
-  const response = await fetch("http://127.0.0.1:5000/transactions/1", {
+export const updateTransaction = async (formData: { amount: number; category: string; type: string; description: string; tid: number }) => {
+  const response = await fetch(`http://127.0.0.1:5000/transactions/${formData.tid}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      amount: 50.0,
-      type: "income",
-      category: "Salary",
-      description: "Monthly salary",
+      amount: formData.amount,
+      type: formData.type,
+      category: formData.category,
+      description: formData.description,
     }),
   });
   const data = await response.json();
   console.log(data);
 };
 
-export const deleteTransaction = async () => {
-  const response = await fetch("http://127.0.0.1:5000/transactions/3", {
+export const deleteTransaction = async (tid: number) => {
+  const response = await fetch(`http://127.0.0.1:5000/transactions/${tid}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

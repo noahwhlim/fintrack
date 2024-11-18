@@ -28,9 +28,9 @@ export default function Home() {
       <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Summary />
       <AddTransaction />
-      <div className="mt-8 grid gap-8 md:grid-cols-2">
+      <div className="mt-8 grid gap-8 ">
         <RecentTransactions />
-        <SpendingBreakdown />
+        {/* <SpendingBreakdown /> */}
       </div>
       <BottomNav />
       </main>
